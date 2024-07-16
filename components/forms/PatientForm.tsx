@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,6 +17,11 @@ export const PatientForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  // The useForm hook from react-hook-form is used to handle form state, validation, and submission.
+  //   <z.infer<typeof UserFormValidation>>
+  // This infers the type of form data from the UserFormValidation schema, ensuring type safety.
+  // resolver: zodResolver(UserFormValidation): This integrates zod schema validation with react-hook-form.
+  // The zodResolver function wraps the UserFormValidation schema, providing validation rules for the form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
@@ -51,38 +55,40 @@ export const PatientForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
-        <section className="mb-12 space-y-4">
-          <h1 className="header">Hi there 👋</h1>
-          <p className="text-dark-700">Get started with appointments.</p>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='flex-1 space-y-6'>
+        <section className='mb-12 space-y-4'>
+          <h1 className='header'>Hi there 👋</h1>
+          <p className='text-dark-700'>Get started with appointments.</p>
         </section>
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="name"
-          label="Full name"
-          placeholder="John Doe"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
+          name='name'
+          label='Full name'
+          placeholder='DHRUV VK'
+          iconSrc='/assets/icons/user.svg'
+          iconAlt='user'
         />
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="email"
-          label="Email"
-          placeholder="johndoe@gmail.com"
-          iconSrc="/assets/icons/email.svg"
-          iconAlt="email"
+          name='email'
+          label='Email'
+          placeholder='DHRUV@gmail.com'
+          iconSrc='/assets/icons/email.svg'
+          iconAlt='email'
         />
 
         <CustomFormField
           fieldType={FormFieldType.PHONE_INPUT}
           control={form.control}
-          name="phone"
-          label="Phone number"
-          placeholder="(555) 123-4567"
+          name='phone'
+          label='Phone number'
+          placeholder='8586XXXXXX'
         />
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
